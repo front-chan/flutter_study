@@ -83,26 +83,83 @@ class App extends StatelessWidget {
                     backgroundColor: Color(0xFF1F2123),
                     textColor: Colors.white,
                   ),
-                  // MyButton()
-                  // Container(
-                  //   decoration: BoxDecoration(
-                  //       color: const Color(0xFF1F2123),
-                  //       borderRadius: BorderRadius.circular(45)),
-                  //   child: const Padding(
-                  //     padding: EdgeInsets.symmetric(
-                  //       vertical: 20,
-                  //       horizontal: 50,
-                  //     ),
-                  //     child: Text(
-                  //       'Request',
-                  //       style: TextStyle(
-                  //         color: Colors.white,
-                  //         fontSize: 20,
-                  //       ),
-                  //     ),
-                  //   ),
-                  // )
                 ],
+              ),
+              const SizedBox(
+                height: 100,
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    "Wallets",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 36,
+                        fontWeight: FontWeight.w600),
+                  ),
+                  Text(
+                    "View All",
+                    style: TextStyle(
+                      color: Colors.white.withOpacity(.7),
+                      fontSize: 18,
+                    ),
+                  )
+                ],
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  color: const Color(0xFF1F2123),
+                  borderRadius: BorderRadius.circular(25),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(30),
+                  child: Row(
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            "Euro",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 32,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Row(
+                            children: [
+                              const Text(
+                                "6 428",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                'EUR',
+                                style: TextStyle(
+                                  color: Colors.white.withOpacity(.7),
+                                  fontSize: 20,
+                                ),
+                              ),
+                            ],
+                          )
+                        ],
+                      )
+                    ],
+                  ),
+                ),
               )
             ],
           ),
@@ -111,32 +168,3 @@ class App extends StatelessWidget {
     );
   }
 }
-
-// 전구 누르고 Extract Widget - 커스텀 위젯 사용 가능 (재사용할 수 있게 만듬)
-// class MyButton extends StatelessWidget {
-//   const MyButton({
-//     super.key,
-//   });
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       decoration: BoxDecoration(
-//           color: const Color(0xFF1F2123),
-//           borderRadius: BorderRadius.circular(45)),
-//       child: const Padding(
-//         padding: EdgeInsets.symmetric(
-//           vertical: 20,
-//           horizontal: 50,
-//         ),
-//         child: Text(
-//           'Request',
-//           style: TextStyle(
-//             color: Colors.white,
-//             fontSize: 20,
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
