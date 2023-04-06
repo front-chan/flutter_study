@@ -10,14 +10,47 @@ class App extends StatelessWidget {
     return MaterialApp(
       // home: Text('Hello Chan!'),
       home: Scaffold(
-        appBar: AppBar(
-          centerTitle: false, // 가운데 정렬 해제
-          elevation: 0, // 그림자 표시
-          title: Text('Hello flutter!'),
-          // backgroundColor: Color(Color(0, 0, 0)),
-        ),
-        body: Center(
-          child: Text('Hello Chan!'),
+        // backgroundColor: Colors.teal[200],
+        // backgroundColor: Colors.black,
+        // backgroundColor: Color.fromARGB(0, 145, 74, 74),
+        // backgroundColor: Color.fromRGBO(72, 213, 145, 0.379),
+        backgroundColor: Color(0xFF181818),
+        body: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: 40,
+          ),
+          child: Column(
+            children: [
+              SizedBox(
+                height: 80,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Text(
+                        'Hello, Chan',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 28,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                      Text(
+                        'Welcome back!',
+                        style: TextStyle(
+                          color: Colors.white.withOpacity(.7),
+                          fontSize: 18,
+                        ),
+                      ),
+                    ],
+                  )
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );
