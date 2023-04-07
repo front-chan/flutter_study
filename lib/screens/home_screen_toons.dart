@@ -50,17 +50,16 @@ class HomeScreenToons extends StatelessWidget {
               // );
 
               // ListView.separated
-              return ListView.separated(
-                scrollDirection: Axis.horizontal,
-                itemCount: snapshot.data!.length,
-                itemBuilder: (context, index) {
-                  // print(index);
-                  var webtoon = snapshot.data![index];
-                  return Text(webtoon.title);
-                },
-                separatorBuilder: (context, index) => const SizedBox(
-                  width: 20,
-                ),
+              return Column(
+                children: [
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  // 화면의 남는 고간을 차지하는 widget
+                  Expanded(
+                    child: makeList(snapshot),
+                  ),
+                ],
               );
             }
             return const Center(
@@ -69,5 +68,59 @@ class HomeScreenToons extends StatelessWidget {
             // return const Text('Loading...');
           }),
         ));
+  }
+
+  ListView makeList(AsyncSnapshot<List<WebtoonModel>> snapshot) {
+    return ListView.separated(
+      scrollDirection: Axis.horizontal,
+      itemCount: snapshot.data!.length,
+      padding: const EdgeInsets.symmetric(
+        vertical: 10,
+        horizontal: 20,
+      ),
+      itemBuilder: (context, index) {
+        // print(index);
+        var webtoon = snapshot.data![index];
+        return Column(
+          children: [
+            Container(
+              width: 250,
+              // 자식의 부모 영역 침범을 제어하는 방법
+              clipBehavior: Clip.hardEdge,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                boxShadow: [
+                  BoxShadow(
+                    blurRadius: 7,
+                    offset: const Offset(5, 5),
+                    color: Colors.black.withOpacity(.8),
+                  ),
+                ],
+              ),
+              child: Image.network(
+                webtoon.thumb,
+                headers: const {
+                  "User-Agent":
+                      "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36",
+                },
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Text(
+              webtoon.title,
+              style: const TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ],
+        );
+      },
+      separatorBuilder: (context, index) => const SizedBox(
+        width: 40,
+      ),
+    );
   }
 }
