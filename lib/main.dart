@@ -12,9 +12,15 @@ class App extends StatefulWidget {
 class _AppState extends State<App> {
   int counter = 0;
 
-  void onClicked() {
+  void onPlused() {
     setState(() {
       counter = counter + 1;
+    });
+  }
+
+  void onMinused() {
+    setState(() {
+      counter = counter - 1;
     });
   }
 
@@ -39,12 +45,27 @@ class _AppState extends State<App> {
                   fontSize: 30,
                 ),
               ),
-              IconButton(
-                iconSize: 40,
-                onPressed: onClicked,
-                icon: const Icon(
-                  Icons.add_box_sharp,
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IconButton(
+                    // style: const ButtonStyle(
+                    //   backgroundColor: MaterialStatePropertyAll(Colors.black),
+                    // ),
+                    iconSize: 40,
+                    onPressed: onMinused,
+                    icon: const Icon(
+                      Icons.exposure_minus_1_sharp,
+                    ),
+                  ),
+                  IconButton(
+                    iconSize: 40,
+                    onPressed: onPlused,
+                    icon: const Icon(
+                      Icons.plus_one_sharp,
+                    ),
+                  ),
+                ],
               )
             ],
           ),
