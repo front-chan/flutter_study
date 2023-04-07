@@ -15,7 +15,7 @@ class HomeScreenToons extends StatelessWidget {
         appBar: AppBar(
           elevation: 1,
           backgroundColor: Colors.teal[300],
-          foregroundColor: Colors.black, // 글씨 색상
+          foregroundColor: Colors.white, // 글씨 색상
           title: const Text(
             "Today's 툰s",
             style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),
