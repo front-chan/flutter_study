@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_study/widgets/Button.dart';
+import 'package:flutter_study/widgets/button.dart';
 import 'package:flutter_study/widgets/currency_card.dart';
 
 void main() {
