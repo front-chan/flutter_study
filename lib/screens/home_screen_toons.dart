@@ -1,12 +1,36 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter/src/widgets/container.dart';
-// import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_study/models/webtoon_model.dart';
+import 'package:flutter_study/services/api_service.dart';
 
-class HomeScreenToons extends StatelessWidget {
+class HomeScreenToons extends StatefulWidget {
   const HomeScreenToons({super.key});
 
   @override
+  State<HomeScreenToons> createState() => _HomeScreenToonsState();
+}
+
+class _HomeScreenToonsState extends State<HomeScreenToons> {
+  List<WebtoonModel> webtoons = [];
+  bool isLoading = true;
+
+  // 비동기 함수
+  void waitForWebToons() async {
+    webtoons = await ApiService.getTodaysToons();
+    isLoading = false;
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    waitForWebToons();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    print(webtoons);
+    print(isLoading);
+
     return Scaffold(
       backgroundColor: Colors.amber[100],
       appBar: AppBar(
