@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_study/models/webtoon_detail_model.dart';
 import 'package:flutter_study/models/webtoon_episode_model.dart';
 import 'package:flutter_study/services/api_service.dart';
+import 'package:flutter_study/widgets/episode_widget.dart';
 
 class DetailScreen extends StatefulWidget {
   final String title, thumb, id;
@@ -117,9 +118,9 @@ class _DetailScreenState extends State<DetailScreen> {
                             ),
                             Text(
                               snapshot.data!.age,
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 16,
-                                color: Colors.green,
+                                color: Colors.teal[300],
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
@@ -141,46 +142,9 @@ class _DetailScreenState extends State<DetailScreen> {
                     return Column(
                       children: [
                         for (var episode in snapshot.data!)
-                          Container(
-                            margin: const EdgeInsets.only(bottom: 10),
-                            decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  blurRadius: 7,
-                                  offset: const Offset(4, 4),
-                                  color: Colors.black.withOpacity(.4),
-                                )
-                              ],
-                              border: Border.all(
-                                color: Colors.white,
-                                width: 2,
-                              ),
-                              borderRadius: BorderRadius.circular(10),
-                              color: Colors.teal[300],
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                vertical: 10,
-                                horizontal: 20,
-                              ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    episode.title,
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 16,
-                                    ),
-                                  ),
-                                  const Icon(
-                                    Icons.chevron_right_sharp,
-                                    color: Colors.white,
-                                  ),
-                                ],
-                              ),
-                            ),
+                          Episode(
+                            episode: episode,
+                            webtoonId: widget.id,
                           ),
                       ],
                     );

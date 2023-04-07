@@ -63,8 +63,10 @@ class HomeScreenToons extends StatelessWidget {
                 ],
               );
             }
-            return const Center(
-              child: CircularProgressIndicator(),
+            return Center(
+              child: CircularProgressIndicator(
+                color: Colors.teal[300],
+              ),
             );
             // return const Text('Loading...');
           }),
