@@ -3,6 +3,7 @@ import 'package:flutter_study/models/webtoon_detail_model.dart';
 import 'package:flutter_study/models/webtoon_episode_model.dart';
 import 'package:flutter_study/services/api_service.dart';
 import 'package:flutter_study/widgets/episode_widget.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DetailScreen extends StatefulWidget {
   final String title, thumb, id;
@@ -21,12 +22,45 @@ class DetailScreen extends StatefulWidget {
 class _DetailScreenState extends State<DetailScreen> {
   late Future<WebtoonDetailModel> webtoon;
   late Future<List<WebtoonEpisodeModel>> episodes;
+  late SharedPreferences prefs;
+  bool isLiked = false;
+
+  Future initPrefs() async {
+    // 사용자의 저장소에 connection이 생김
+    prefs = await SharedPreferences.getInstance();
+    final likedTooons = prefs.getStringList('likedToons');
+    if (likedTooons != null) {
+      if (likedTooons.contains(widget.id) == true) {
+        setState(() {
+          isLiked = true;
+        });
+      }
+    } else {
+      await prefs.setStringList('likedTooons', []);
+    }
+  }
 
   @override
   void initState() {
     super.initState();
     webtoon = ApiService.getToonById(widget.id);
     episodes = ApiService.getLatesEpisodesById(widget.id);
+    initPrefs();
+  }
+
+  onHeartTap() async {
+    final likedTooons = prefs.getStringList('likedToons');
+    if (likedTooons != null) {
+      if (isLiked) {
+        likedTooons.remove(widget.id);
+      } else {
+        likedTooons.add(widget.id);
+      }
+      await prefs.setStringList('likedToons', likedTooons);
+      setState(() {
+        isLiked = !isLiked;
+      });
+    }
   }
 
   @override
@@ -37,6 +71,14 @@ class _DetailScreenState extends State<DetailScreen> {
         elevation: 1,
         backgroundColor: Colors.teal[300],
         foregroundColor: Colors.white, // 글씨 색상
+        actions: [
+          IconButton(
+            onPressed: onHeartTap,
+            icon: Icon(
+              isLiked ? Icons.favorite_sharp : Icons.favorite_outline_sharp,
+            ),
+          ),
+        ],
         title: Text(
           widget.title,
           style: const TextStyle(fontSize: 25, fontWeight: FontWeight.w600),
