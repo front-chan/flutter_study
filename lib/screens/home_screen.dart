@@ -52,6 +52,15 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  // 타이머 리셋
+  void onResetPressed() {
+    timer.cancel();
+    setState(() {
+      isRunning = false;
+      totalSeconds = twentyFiveMinutes;
+    });
+  }
+
   // Data Format - 1500초를 25분으로 변경
   String format(int seconds) {
     var duration = Duration(seconds: seconds);
@@ -89,15 +98,28 @@ class _HomeScreenState extends State<HomeScreen> {
               // decoration: const BoxDecoration(
               //   color: Colors.green,
               // ),
-              child: IconButton(
-                iconSize: 120,
-                color: Theme.of(context).cardColor,
-                onPressed: isRunning ? onPausePressed : onStartPressed,
-                icon: Icon(
-                  isRunning
-                      ? Icons.pause_circle_outline_sharp
-                      : Icons.play_circle_outline_sharp,
-                ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IconButton(
+                    iconSize: 120,
+                    color: Theme.of(context).cardColor,
+                    onPressed: isRunning ? onPausePressed : onStartPressed,
+                    icon: Icon(
+                      isRunning
+                          ? Icons.pause_circle_outline_sharp
+                          : Icons.play_circle_outline_sharp,
+                    ),
+                  ),
+                  IconButton(
+                    iconSize: 120,
+                    color: Theme.of(context).textTheme.displayLarge!.color,
+                    onPressed: onResetPressed,
+                    icon: const Icon(
+                      Icons.restore_outlined,
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
